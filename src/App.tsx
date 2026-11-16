@@ -453,7 +453,7 @@ export default function App() {
               <span className="block overflow-hidden pb-3">
                 <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }}
                   transition={{ duration: 0.7, delay: 0.39, ease: [0.22, 1, 0.36, 1] }}>
-                  into <span className="relative inline-block text-lime">customers.<svg aria-hidden className="absolute -bottom-1.5 left-0 h-[0.13em] w-full text-lime" viewBox="0 0 220 12" fill="none" preserveAspectRatio="none"><path d="M3 9.5 C 70 2.5, 150 2.5, 217 6.5" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
+                  into <span className="relative inline-block text-lime">customers.<svg aria-hidden className="absolute -bottom-1.5 left-0 h-[0.13em] w-full -rotate-2 text-lime" viewBox="0 0 220 12" fill="none" preserveAspectRatio="none"><path d="M3 10.8 C 65 9.5, 140 5.5, 217 1.6" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
                 </motion.span>
               </span>
             </h1>
