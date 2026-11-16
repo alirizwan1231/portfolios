@@ -216,7 +216,7 @@ function LiveClock() {
     const f = () => setTime(new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Karachi' }).format(new Date()));
     f(); const t = setInterval(f, 1000); return () => clearInterval(t);
   }, []);
-  return <span className="font-mono text-xs text-muted">Bahawalnagar, PK — {time}</span>;
+  return <span className="font-mono text-xs text-muted">Lahore, PK — {time}</span>;
 }
 
 function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
@@ -490,7 +490,7 @@ export default function App() {
               <img src={profileImage} alt="Portrait of Ali Rizwan" className="aspect-[4/5] w-full object-cover grayscale-[35%] transition duration-500 hover:grayscale-0" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/40 to-transparent p-5 pt-16">
                 <p className="font-display text-xl font-bold">Ali Rizwan</p>
-                <p className="flex items-center gap-1.5 text-sm text-muted"><MapPin className="h-4 w-4 text-lime" /> Bahawalnagar, Pakistan · working worldwide</p>
+                <p className="flex items-center gap-1.5 text-sm text-muted"><MapPin className="h-4 w-4 text-lime" /> Lahore, Pakistan · working worldwide</p>
               </div>
             </div>
             <div className="absolute -left-4 top-6 rounded-2xl border border-white/10 bg-panel/90 px-4 py-2.5 backdrop-blur">
@@ -656,7 +656,7 @@ export default function App() {
       {/* ---------- FOOTER ---------- */}
       <footer className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-4 py-8 text-sm text-muted sm:flex-row sm:px-6">
-          <p className="font-display font-bold text-cream">ali<span className="text-lime">.</span>rizwan <span className="ml-2 font-sans font-normal text-muted">© {new Date().getFullYear()} · Bahawalnagar, Pakistan</span></p>
+          <p className="font-display font-bold text-cream">ali<span className="text-lime">.</span>rizwan <span className="ml-2 font-sans font-normal text-muted">© {new Date().getFullYear()} · Lahore, Pakistan</span></p>
           <LiveClock />
           <div className="flex items-center gap-3">
             {[
