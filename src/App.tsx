@@ -6,7 +6,7 @@ import {
   Blocks, Sparkles, GraduationCap, Calculator, Percent, Landmark, Shirt, Star,
   Command, Copy, Check, CornerDownLeft,
 } from 'lucide-react';
-import profileImage from './profileimage.png';
+import { profileImage } from './profile-image';
 
 const EMAIL = 'alis5597153@gmail.com';
 
