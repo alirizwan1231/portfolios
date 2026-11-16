@@ -114,7 +114,7 @@ function Particles() {
   return <canvas ref={ref} aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />;
 }
 
-const ROLES = ['WordPress Developer', 'Front-End Developer', 'WooCommerce Builder', 'Next.js Developer'];
+const ROLES = ['Full-Stack Developer', 'AI-Powered Web Builder', 'Next.js Developer', 'React Developer'];
 const GLYPHS = '!<>-_\\/[]{}—=+*^?#';
 
 function ScrambleRole() {
@@ -142,8 +142,8 @@ function ScrambleRole() {
 }
 
 const TERM_LINES = [
-  { cmd: '$ whoami', out: 'ali-rizwan — wordpress & front-end developer' },
-  { cmd: '$ services --list', out: 'wordpress · woocommerce · react · next.js · seo' },
+  { cmd: '$ whoami', out: 'ali-rizwan — full-stack developer & ai builder' },
+  { cmd: '$ services --list', out: 'full-stack apps · next.js · react · supabase · ai features' },
   { cmd: '$ status', out: 'available for new projects' },
 ];
 
@@ -307,16 +307,16 @@ const projects = [
 ];
 
 const services = [
-  { icon: Globe, title: 'WordPress Websites', desc: 'Custom WordPress + Elementor sites that are fast, secure and easy for you to update yourself.' },
-  { icon: ShoppingBag, title: 'WooCommerce Stores', desc: 'E-commerce stores with clean product pages, smooth checkout and payments set up properly.' },
+  { icon: Code2, title: 'Full-Stack Web Apps', desc: 'Complete web applications with Next.js and React — dashboards, portals and tools with logins, databases and real workflows, built end to end.' },
+  { icon: Sparkles, title: 'AI-Powered Features', desc: 'Smart, creative features built with AI — from hand-tracking interfaces to automation and AI-assisted tools that make a product feel ahead of its time.' },
+  { icon: LayoutTemplate, title: 'Business Websites', desc: 'Fast, modern websites and landing pages that turn visitors into enquiries — designed, built and launched by one developer, start to finish.' },
   { icon: PenTool, title: 'Website Redesign', desc: 'Old, slow or dated site? I rebuild it modern, responsive and eye-catching — without losing your content.' },
+  { icon: Globe, title: 'WordPress & WooCommerce', desc: 'Also available on the side: custom WordPress + Elementor sites and WooCommerce stores — fast, secure and easy for you to update yourself.' },
   { icon: Gauge, title: 'Speed & Fixes', desc: 'Performance optimisation and technical fixes: Core Web Vitals, broken layouts, plugin conflicts.' },
-  { icon: Search, title: 'On-Page SEO', desc: 'Structure, headings, metadata and internal linking done right, so Google understands every page.' },
-  { icon: LayoutTemplate, title: 'Landing Pages', desc: 'Focused, high-converting landing pages and business sites that turn visitors into enquiries.' },
 ];
 
 const stack = ['WordPress', 'Elementor', 'WooCommerce', 'React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Supabase', 'PHP', 'Plugin Development', 'SEO Structure', 'Responsive UI', 'Git & GitHub'];
-const marquee = ['WordPress', 'WooCommerce', 'React', 'Next.js', 'Elementor', 'Speed Optimisation', 'SEO', 'Landing Pages', 'Redesigns', 'Plugins'];
+const marquee = ['Full-Stack Apps', 'Next.js', 'React', 'AI Features', 'Supabase', 'Dashboards', 'Web Tools', 'WordPress', 'WooCommerce', 'SEO'];
 
 function VelocityMarquee() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -462,7 +462,7 @@ export default function App() {
               className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
               <span className="mb-1 block font-mono text-base font-semibold text-lime sm:text-lg"><ScrambleRole /></span>
               I&apos;m <strong className="text-cream">Ali Rizwan</strong>, from Pakistan.
-              I craft fast, modern websites with WordPress, WooCommerce, React and Next.js — for clients worldwide.
+              I build full-stack web apps and websites with React, Next.js and Supabase — using AI-assisted workflows to ship faster and smarter, for clients worldwide. WordPress and WooCommerce too, when a project calls for it.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.68 }}
@@ -495,7 +495,7 @@ export default function App() {
             </div>
             <div className="absolute -left-4 top-6 rounded-2xl border border-white/10 bg-panel/90 px-4 py-2.5 backdrop-blur">
               <p className="font-mono text-xs text-lime">role</p>
-              <p className="text-sm font-bold">WordPress + Front-End Dev</p>
+              <p className="text-sm font-bold">Full-Stack Dev · AI Builder</p>
             </div>
             <div className="absolute -right-3 bottom-24 rounded-2xl border border-white/10 bg-panel/90 px-4 py-2.5 backdrop-blur">
               <p className="font-mono text-xs text-lime">focus</p>
@@ -514,10 +514,10 @@ export default function App() {
             </Reveal>
             <Reveal i={1}>
               <div className="space-y-5 text-lg leading-relaxed text-muted">
-                <p>I&apos;m a passionate WordPress designer and front-end developer dedicated to building modern, responsive and user-friendly websites. My work combines clean code with creative design, so sites don&apos;t just look stunning — they load fast, rank well and achieve real business goals.</p>
+                <p>I&apos;m a full-stack developer who builds modern web apps and websites end to end — front-end, backend, database and deployment. I develop with AI-assisted workflows (vibe coding) to explore new ideas and ship fast without cutting corners, so products don&apos;t just look stunning — they load fast, rank well and achieve real business goals.</p>
                 <p>Alongside client work, I design and ship my own products end to end — from a university management app and an official college website with staff portals, to calculator tools used by people around the world and a free WordPress plugin. That means when you hire me, you get someone who has built the whole thing before, not just a theme installer.</p>
                 <p className="flex flex-wrap gap-2 pt-2">
-                  {['Based in Pakistan', 'Clients worldwide', 'WordPress + React/Next.js'].map(chip => (
+                  {['Based in Pakistan', 'Clients worldwide', 'Full-Stack + AI'].map(chip => (
                     <span key={chip} className="rounded-full border border-white/10 bg-panel px-4 py-1.5 text-sm font-semibold text-cream">{chip}</span>
                   ))}
                 </p>
@@ -581,9 +581,9 @@ export default function App() {
               <h3 className="font-display text-4xl font-bold sm:text-5xl">The stack I <span className="text-lime">ship with</span></h3>
               <div className="mt-8 rounded-[24px] border border-white/10 bg-panel p-6 sm:p-8">
                 {[
-                  { label: '// wordpress world', items: ['WordPress', 'Elementor', 'WooCommerce', 'WordPress Plugins', 'PHP', 'On-page SEO'] },
                   { label: '// front-end & apps', items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Three.js'] },
-                  { label: '// backend & tools', items: ['Supabase', 'Cloudflare R2', 'Vercel', 'Git & GitHub', 'Responsive Design', 'Speed Optimisation'] },
+                  { label: '// backend & tools', items: ['Supabase', 'Cloudflare R2', 'Vercel', 'Git & GitHub', 'AI-Assisted Workflow', 'Responsive Design', 'Speed Optimisation'] },
+                  { label: '// wordpress world', items: ['WordPress', 'Elementor', 'WooCommerce', 'WordPress Plugins', 'PHP', 'On-page SEO'] },
                 ].map((g, gi) => (
                   <div key={g.label} className={gi > 0 ? 'mt-8' : ''}>
                     <p className="font-mono text-sm text-muted">{g.label}</p>
