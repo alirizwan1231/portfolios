@@ -4,7 +4,7 @@ import {
   ArrowUpRight, ArrowDown, Github, Facebook, Instagram, Mail, MapPin,
   Globe, ShoppingBag, PenTool, Gauge, Search, LayoutTemplate, Code2,
   Blocks, Sparkles, GraduationCap, Calculator, Percent, Landmark, Shirt, Star,
-  Command, Copy, Check, CornerDownLeft,
+  Command, Copy, Check, CornerDownLeft, Rocket,
 } from 'lucide-react';
 import { profileImage } from './profile-image';
 
@@ -146,6 +146,19 @@ const TERM_LINES = [
   { cmd: '$ services --list', out: 'wordpress · woocommerce · react · next.js · seo' },
   { cmd: '$ status', out: 'available for new projects' },
 ];
+
+
+function CopyEmailButton() {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(EMAIL); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* clipboard unavailable */ }
+  };
+  return (
+    <button type="button" onClick={copy} className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-bold transition hover:border-lime/50 hover:text-lime">
+      {copied ? <Check className="h-4 w-4 text-lime" /> : <Copy className="h-4 w-4" />} {copied ? 'Copied' : 'Copy email'}
+    </button>
+  );
+}
 
 function TypeTerminal() {
   const [lines, setLines] = useState<string[]>([]);
@@ -428,17 +441,19 @@ export default function App() {
               <span className="h-2 w-2 rounded-full bg-lime animate-pulseDot" /> Available for freelance projects
             </motion.div>
 
-            <h1 className="mt-7 font-display text-[13.5vw] font-bold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">
-              {['I build', 'websites that'].map((line, li) => (
-                <span key={line} className="block overflow-hidden pb-1">
-                  <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.15 + li * 0.12, ease: [0.22, 1, 0.36, 1] }}>{line}</motion.span>
-                </span>
-              ))}
-              <span className="block overflow-hidden pb-2">
+            <h1 className="mt-7 font-display text-[13.5vw] font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}>I build websites</motion.span>
+              </span>
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.27, ease: [0.22, 1, 0.36, 1] }}>that turn <span className="text-lime">visitors</span></motion.span>
+              </span>
+              <span className="block overflow-hidden pb-3">
                 <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }}
                   transition={{ duration: 0.7, delay: 0.39, ease: [0.22, 1, 0.36, 1] }}>
-                  <span className="text-stroke">turn visitors</span><br />into <span className="text-lime underline decoration-lime decoration-[3px] underline-offset-[10px]">customers.</span>
+                  into <span className="relative inline-block text-lime">customers.<svg aria-hidden className="absolute -bottom-1.5 left-0 h-[0.13em] w-full text-lime" viewBox="0 0 220 12" fill="none" preserveAspectRatio="none"><path d="M3 9.5 C 70 2.5, 150 2.5, 217 6.5" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
                 </motion.span>
               </span>
             </h1>
@@ -562,61 +577,77 @@ export default function App() {
           </div>
 
           <Reveal i={1}>
-            <div className="mt-14 rounded-[24px] border border-white/10 bg-panel p-6 sm:p-8">
-              <p className="font-mono text-xs uppercase tracking-[0.25em] text-lime">Toolbox</p>
-              <h3 className="mt-2 font-display text-3xl font-bold sm:text-4xl">The stack I ship with</h3>
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                {stack.map((t, i) => (
-                  <motion.span key={t} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }} transition={{ delay: i * 0.03, duration: 0.25 }}
-                    className="cursor-default rounded-full border border-white/10 px-4 py-2 text-sm font-semibold transition hover:border-lime/60 hover:text-lime">{t}</motion.span>
+            <div className="mt-20">
+              <h3 className="font-display text-4xl font-bold sm:text-5xl">The stack I <span className="text-lime">ship with</span></h3>
+              <div className="mt-8 rounded-[24px] border border-white/10 bg-panel p-6 sm:p-8">
+                {[
+                  { label: '// wordpress world', items: ['WordPress', 'Elementor', 'WooCommerce', 'WordPress Plugins', 'PHP', 'On-page SEO'] },
+                  { label: '// front-end & apps', items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Three.js'] },
+                  { label: '// backend & tools', items: ['Supabase', 'Cloudflare R2', 'Vercel', 'Git & GitHub', 'Responsive Design', 'Speed Optimisation'] },
+                ].map((g, gi) => (
+                  <div key={g.label} className={gi > 0 ? 'mt-8' : ''}>
+                    <p className="font-mono text-sm text-muted">{g.label}</p>
+                    <div className="mt-4 flex flex-wrap gap-2.5">
+                      {g.items.map(item => (
+                        <span key={item} className="cursor-default rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 font-semibold text-cream transition hover:border-lime/60 hover:text-lime">{item}</span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
-              <p className="mt-5 flex items-center gap-2 text-sm text-muted"><Blocks className="h-4 w-4 text-lime" /> No percentage bars — the work above is the proof.</p>
             </div>
           </Reveal>
         </section>
 
         {/* ---------- PROCESS ---------- */}
         <section id="process" className="scroll-mt-28 pb-20 lg:pb-28">
-          <Reveal><h2 className="font-display text-4xl font-bold sm:text-5xl">How a project runs</h2></Reveal>
+          <Reveal>
+            <h2 className="font-display text-4xl font-bold sm:text-5xl">How a project <span className="text-lime">runs</span></h2>
+            <p className="mt-4 max-w-xl text-lg text-muted">Simple and transparent — you always know what&apos;s happening and what comes next.</p>
+          </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { title: 'Discover', desc: 'A short call or chat about your business, goals and what the site must achieve.' },
-              { title: 'Design', desc: 'You see the look early — layout, colours and type — and we refine it together.' },
-              { title: 'Build', desc: 'I develop it fast, responsive and SEO-ready, and keep you updated as it comes alive.' },
-              { title: 'Launch & grow', desc: 'We go live, check everything on real devices, and I stay available for fixes and improvements.' },
-            ].map((step, idx) => (
-              <Reveal key={step.title} i={idx}>
-                <div className="h-full rounded-[24px] border border-white/10 bg-panel p-6">
-                  <p className="font-mono text-sm font-semibold text-lime">{String(idx + 1).padStart(2, '0')}</p>
-                  <p className="mt-3 font-display text-2xl font-bold">{step.title}</p>
-                  <p className="mt-3 leading-relaxed text-muted">{step.desc}</p>
-                </div>
-              </Reveal>
-            ))}
+              { icon: Search, title: 'Discover', desc: 'We talk about your business, your customers and what the website needs to achieve. No jargon, honest advice.' },
+              { icon: PenTool, title: 'Design', desc: 'I design the layout and look around your brand — you review it, we refine it together until it feels right.' },
+              { icon: Code2, title: 'Build', desc: 'I build the site properly — fast, responsive on every screen, with SEO structure baked in from the start.' },
+              { icon: Rocket, title: 'Launch', desc: 'Final checks, go-live, and a walkthrough so you can manage your own site with confidence afterwards.' },
+            ].map((step, idx) => {
+              const Icon = step.icon;
+              return (
+                <Reveal key={step.title} i={idx}>
+                  <div className="relative h-full overflow-hidden rounded-[24px] border border-white/10 bg-panel p-6">
+                    <span aria-hidden className="absolute inset-x-0 top-0 h-[3px] bg-lime" />
+                    <span className="inline-flex rounded-xl bg-lime/15 p-3 text-lime"><Icon className="h-6 w-6" strokeWidth={1.8} /></span>
+                    <h3 className="mt-5 font-display text-xl font-bold">{step.title}</h3>
+                    <p className="mt-2.5 leading-relaxed text-muted">{step.desc}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </section>
 
         {/* ---------- CONTACT CTA ---------- */}
         <section id="contact" className="pb-24">
           <Reveal>
-            <div className="relative overflow-hidden rounded-[32px] border border-lime/25 bg-gradient-to-br from-panel2 via-panel to-ink px-6 py-14 text-center sm:px-12">
-              <div aria-hidden className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[520px] -translate-x-1/2 rounded-full bg-lime/20 blur-[100px]" />
+            <div className="relative overflow-hidden rounded-[32px] border border-lime/25 bg-panel px-6 py-14 sm:px-12">
+              <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-72 w-[520px] rounded-full bg-lime/20 blur-[110px]" />
               <h2 className="relative font-display text-4xl font-bold leading-tight sm:text-6xl">Have a project in mind?<br /><span className="text-lime">Let&apos;s build it.</span></h2>
-              <p className="relative mx-auto mt-4 max-w-lg text-lg text-muted">Tell me what you need — a new site, a store, or a redesign — and I&apos;ll reply with honest next steps.</p>
-              <p className="relative mt-4"><LiveClock /></p>
-              <div className="relative mx-auto mt-9 flex max-w-2xl flex-col justify-center gap-4 sm:flex-row">
+              <p className="relative mt-5 max-w-xl text-lg text-muted">Tell me what you&apos;re making — a new business website, a store, a redesign, or something custom. I&apos;ll reply within 24 hours with honest next steps.</p>
+              <div className="relative mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <Magnetic>
-                  <a href={`mailto:${EMAIL}`} className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-lime px-8 py-4 font-bold text-ink transition hover:bg-cream">
-                    <Mail className="h-5 w-5" /> {EMAIL}
+                  <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 rounded-full bg-lime px-7 py-4 font-bold text-ink transition hover:bg-cream">
+                    <Mail className="h-5 w-5" /> Start a project
                   </a>
                 </Magnetic>
-                <a href="https://github.com/alirizwan1231" target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-white/15 px-8 py-4 font-bold transition hover:border-lime/50 hover:text-lime">
-                  <Github className="h-5 w-5" /> See my code
-                </a>
+                <a href={`mailto:${EMAIL}`} className="font-mono text-lime underline decoration-dashed decoration-lime/60 underline-offset-8 transition hover:decoration-lime">{EMAIL}</a>
+                <CopyEmailButton />
               </div>
-              <p className="relative mt-8 font-mono text-xs text-muted">Tip: press <span className="rounded border border-white/20 px-1.5 py-0.5 text-cream">Ctrl K</span> anywhere on this site</p>
+              <div className="relative mt-10 flex gap-3">
+                <a href="https://github.com/alirizwan1231" target="_blank" rel="noreferrer" aria-label="GitHub" className="rounded-xl border border-white/15 p-3 transition hover:border-lime/50 hover:text-lime"><Github className="h-5 w-5" /></a>
+                <a href="https://facebook.com/Alirizwan3418" target="_blank" rel="noreferrer" aria-label="Facebook" className="rounded-xl border border-white/15 p-3 transition hover:border-lime/50 hover:text-lime"><Facebook className="h-5 w-5" /></a>
+                <a href="https://instagram.com/Alirizwan3418" target="_blank" rel="noreferrer" aria-label="Instagram" className="rounded-xl border border-white/15 p-3 transition hover:border-lime/50 hover:text-lime"><Instagram className="h-5 w-5" /></a>
+              </div>
             </div>
           </Reveal>
         </section>
