@@ -438,26 +438,27 @@ export default function App() {
               <span className="block overflow-hidden pb-2">
                 <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }}
                   transition={{ duration: 0.7, delay: 0.39, ease: [0.22, 1, 0.36, 1] }}>
-                  <span className="text-stroke">turn visitors</span><br />into <span className="text-lime">customers.</span>
+                  <span className="text-stroke">turn visitors</span><br />into <span className="text-lime underline decoration-lime decoration-[3px] underline-offset-[10px]">customers.</span>
                 </motion.span>
               </span>
             </h1>
 
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.55 }}
               className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              I&apos;m <strong className="text-cream">Ali Rizwan</strong>, a <ScrambleRole /> from Pakistan.
+              <span className="mb-1 block font-mono text-base font-semibold text-lime sm:text-lg"><ScrambleRole /></span>
+              I&apos;m <strong className="text-cream">Ali Rizwan</strong>, from Pakistan.
               I craft fast, modern websites with WordPress, WooCommerce, React and Next.js — for clients worldwide.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.68 }}
-              className="mt-9 flex flex-wrap items-center gap-4">
+              className="mt-9 flex max-w-xl flex-col gap-4 sm:flex-row">
               <Magnetic>
-                <a href="#work" className="group inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3.5 font-bold text-ink transition hover:bg-cream">
+                <a href="#work" className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-lime px-8 py-4 font-bold text-ink transition hover:bg-cream">
                   View my work <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
                 </a>
               </Magnetic>
               <a href="https://github.com/alirizwan1231" target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-bold transition hover:border-lime/50 hover:text-lime">
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-white/15 px-8 py-4 font-bold transition hover:border-lime/50 hover:text-lime">
                 <Github className="h-5 w-5" /> GitHub
               </a>
             </motion.div>
@@ -562,7 +563,8 @@ export default function App() {
 
           <Reveal i={1}>
             <div className="mt-14 rounded-[24px] border border-white/10 bg-panel p-6 sm:p-8">
-              <h3 className="flex items-center gap-2 font-display text-xl font-bold"><Code2 className="h-5 w-5 text-lime" /> My toolbox</h3>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-lime">Toolbox</p>
+              <h3 className="mt-2 font-display text-3xl font-bold sm:text-4xl">The stack I ship with</h3>
               <div className="mt-5 flex flex-wrap gap-2.5">
                 {stack.map((t, i) => (
                   <motion.span key={t} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
@@ -577,7 +579,7 @@ export default function App() {
 
         {/* ---------- PROCESS ---------- */}
         <section id="process" className="scroll-mt-28 pb-20 lg:pb-28">
-          <Reveal><h2 className="font-display text-4xl font-bold sm:text-5xl">How we&apos;ll work together</h2></Reveal>
+          <Reveal><h2 className="font-display text-4xl font-bold sm:text-5xl">How a project runs</h2></Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { title: 'Discover', desc: 'A short call or chat about your business, goals and what the site must achieve.' },
@@ -587,7 +589,8 @@ export default function App() {
             ].map((step, idx) => (
               <Reveal key={step.title} i={idx}>
                 <div className="h-full rounded-[24px] border border-white/10 bg-panel p-6">
-                  <p className="font-display text-4xl font-bold text-lime/90">{step.title}</p>
+                  <p className="font-mono text-sm font-semibold text-lime">{String(idx + 1).padStart(2, '0')}</p>
+                  <p className="mt-3 font-display text-2xl font-bold">{step.title}</p>
                   <p className="mt-3 leading-relaxed text-muted">{step.desc}</p>
                 </div>
               </Reveal>
@@ -603,13 +606,13 @@ export default function App() {
               <h2 className="relative font-display text-4xl font-bold leading-tight sm:text-6xl">Have a project in mind?<br /><span className="text-lime">Let&apos;s build it.</span></h2>
               <p className="relative mx-auto mt-4 max-w-lg text-lg text-muted">Tell me what you need — a new site, a store, or a redesign — and I&apos;ll reply with honest next steps.</p>
               <p className="relative mt-4"><LiveClock /></p>
-              <div className="relative mt-9 flex flex-wrap justify-center gap-4">
+              <div className="relative mx-auto mt-9 flex max-w-2xl flex-col justify-center gap-4 sm:flex-row">
                 <Magnetic>
-                  <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 rounded-full bg-lime px-7 py-4 font-bold text-ink transition hover:bg-cream">
+                  <a href={`mailto:${EMAIL}`} className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-lime px-8 py-4 font-bold text-ink transition hover:bg-cream">
                     <Mail className="h-5 w-5" /> {EMAIL}
                   </a>
                 </Magnetic>
-                <a href="https://github.com/alirizwan1231" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-4 font-bold transition hover:border-lime/50 hover:text-lime">
+                <a href="https://github.com/alirizwan1231" target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-white/15 px-8 py-4 font-bold transition hover:border-lime/50 hover:text-lime">
                   <Github className="h-5 w-5" /> See my code
                 </a>
               </div>
