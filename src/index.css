@@ -2,21 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Default palette: OLED Lime (RGB triplets, themed live by src/theme.tsx) */
+  --c-bg: 10 12 10;
+  --c-panel: 18 21 15;
+  --c-panel2: 23 28 19;
+  --c-text: 242 245 236;
+  --c-muted: 154 164 143;
+  --c-accent: 184 241 53;
+  --c-accent2: 46 242 160;
+  --c-onaccent: 10 12 10;
+}
+
 html { scroll-behavior: smooth; }
 body { @apply bg-ink text-cream font-sans antialiased; }
-::selection { background: #B8F135; color: #0A0C0A; }
+::selection { background: rgb(var(--c-accent)); color: rgb(var(--c-onaccent)); }
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #0A0C0A; }
-::-webkit-scrollbar-thumb { background: #2A331F; border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: #B8F135; }
+::-webkit-scrollbar-track { background: rgb(var(--c-bg)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--c-panel2)); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-accent)); }
+
+/* Repaint transition — the whole site eases between palettes.
+   Elements carrying Tailwind transition classes keep their own
+   transition-property (class specificity beats these element rules). */
+body, header, section, footer, article, div, a, button, span, p, h1, h2, h3, h4, input, textarea {
+  transition: background-color .55s ease, border-color .55s ease, color .35s ease;
+}
 
 .grain::before {
   content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.text-stroke { -webkit-text-stroke: 1.5px rgba(242,245,236,.85); color: transparent; }
+.text-stroke { -webkit-text-stroke: 1.5px rgb(var(--c-text) / .85); color: transparent; }
+
+/* Colour-wash sweep fired on every palette switch (see src/theme.tsx) */
+.wash-sweep {
+  position: fixed; inset: -12% -30%; z-index: 85; pointer-events: none; opacity: .32;
+  transform: translateX(-115%) skewX(-8deg);
+  animation: washSweep .9s cubic-bezier(.65, 0, .25, 1) forwards;
+}
+@keyframes washSweep {
+  0% { transform: translateX(-115%) skewX(-8deg); }
+  100% { transform: translateX(115%) skewX(-8deg); }
+}
+
+/* "Now showing" toast */
+.toast-pop { animation: toastPop .45s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes toastPop {
+  0% { opacity: 0; transform: translateY(10px) scale(.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 a, button { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid #B8F135; outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 2px solid rgb(var(--c-accent)); outline-offset: 3px; border-radius: 4px; }

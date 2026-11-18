@@ -5,10 +5,12 @@ import {
   Globe, ShoppingBag, PenTool, Gauge, Search, LayoutTemplate, Code2,
   Blocks, Sparkles, GraduationCap, Calculator, Percent, Landmark, Shirt, Star,
   Command, Copy, Check, CornerDownLeft, Rocket,
-  Dumbbell, Car, HardHat, Building2, Lightbulb, type LucideIcon,
+  Dumbbell, Car, HardHat, Building2, Lightbulb, Palette, type LucideIcon,
 } from 'lucide-react';
 import { profileImage } from './profile-image';
 import { projectShots } from './project-shots';
+import { ThemeProvider, useTheme } from './theme';
+import ThemeDock from './components/ThemeDock';
 
 const EMAIL = 'alis5597153@gmail.com';
 
@@ -68,7 +70,7 @@ function Spotlight() {
     return () => window.removeEventListener('mousemove', move);
   }, []);
   return <div ref={ref} aria-hidden className="pointer-events-none fixed left-0 top-0 z-30 hidden h-[500px] w-[500px] rounded-full md:block"
-    style={{ background: 'radial-gradient(circle, rgba(184,241,53,0.07) 0%, transparent 65%)' }} />;
+    style={{ background: 'radial-gradient(circle, rgb(var(--c-accent) / 0.07) 0%, transparent 65%)' }} />;
 }
 
 function Particles() {
@@ -93,21 +95,28 @@ function Particles() {
     let visible = true;
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
     io.observe(canvas);
+    // Particle colours follow the live theme vars (set inline by the theme provider / boot script).
+    const themeRgb = (name: string, fallback: string) => {
+      const v = document.documentElement.style.getPropertyValue(name).trim();
+      return v ? v.split(/\s+/).join(',') : fallback;
+    };
     const tick = () => {
       raf = requestAnimationFrame(tick);
       if (!visible || document.hidden) return;
       ctx.clearRect(0, 0, w, h);
+      const accent = themeRgb('--c-accent', '184,241,53');
+      const text = themeRgb('--c-text', '242,245,236');
       for (const p of pts) {
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
         const dm = Math.hypot(p.x - mouse.x, p.y - mouse.y);
         ctx.beginPath(); ctx.arc(p.x, p.y, dm < 120 ? 2.2 : 1.4, 0, Math.PI * 2);
-        ctx.fillStyle = dm < 120 ? 'rgba(184,241,53,0.9)' : 'rgba(242,245,236,0.35)'; ctx.fill();
-        if (dm < 150) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.strokeStyle = 'rgba(184,241,53,0.25)'; ctx.stroke(); }
+        ctx.fillStyle = dm < 120 ? `rgba(${accent},0.9)` : `rgba(${text},0.35)`; ctx.fill();
+        if (dm < 150) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.strokeStyle = `rgba(${accent},0.25)`; ctx.stroke(); }
       }
       for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
         const a = pts[i], b = pts[j]; const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 110) { ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.strokeStyle = `rgba(184,241,53,${0.14 * (1 - d / 110)})`; ctx.stroke(); }
+        if (d < 110) { ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.strokeStyle = `rgba(${accent},${0.14 * (1 - d / 110)})`; ctx.stroke(); }
       }
     };
     tick();
@@ -398,7 +407,7 @@ function TiltCard({ p }: { p: typeof projects[number] }) {
     const r = ref.current.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width; const py = (e.clientY - r.top) / r.height;
     ref.current.style.transform = `perspective(900px) rotateX(${(0.5 - py) * 7}deg) rotateY(${(px - 0.5) * 9}deg) translateY(-4px)`;
-    if (glareRef.current) glareRef.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(184,241,53,0.16), transparent 55%)`;
+    if (glareRef.current) glareRef.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgb(var(--c-accent) / 0.16), transparent 55%)`;
   };
   const onLeave = () => {
     if (ref.current) ref.current.style.transform = '';
@@ -447,14 +456,23 @@ function TiltCard({ p }: { p: typeof projects[number] }) {
 /* ------------------------------- APP ------------------------------- */
 
 export default function App() {
+  return (
+    <ThemeProvider>
+      <Portfolio />
+    </ThemeProvider>
+  );
+}
+
+function Portfolio() {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25 });
   const [loading, setLoading] = useState(true);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const { setPanelOpen: openThemePanel } = useTheme();
   const closePreloader = useCallback(() => setLoading(false), []);
 
   return (
-    <div className="grain relative min-h-screen overflow-x-clip bg-ink">
+    <div className="grain relative min-h-screen overflow-x-clip bg-ink pb-24">
       <AnimatePresence>{loading && <Preloader done={closePreloader} />}</AnimatePresence>
       <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} />
       <Spotlight />
@@ -476,6 +494,10 @@ export default function App() {
             <button onClick={() => setPaletteOpen(true)} aria-label="Open command palette"
               className="hidden items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 font-mono text-xs text-muted transition hover:border-lime/50 hover:text-lime sm:inline-flex">
               <Command className="h-3.5 w-3.5" /> Ctrl K
+            </button>
+            <button onClick={() => openThemePanel(true)} aria-label="Change colour theme"
+              className="hidden items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 font-mono text-xs text-muted transition hover:border-lime/50 hover:text-lime sm:inline-flex">
+              <Palette className="h-3.5 w-3.5" /> Theme
             </button>
             <Magnetic>
               <a href={`mailto:${EMAIL}`} className="group inline-flex items-center gap-1.5 rounded-full bg-lime px-4 py-2 text-sm font-bold text-ink transition hover:bg-cream">
@@ -729,6 +751,8 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      <ThemeDock />
     </div>
   );
 }

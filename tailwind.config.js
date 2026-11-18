@@ -4,12 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0A0C0A',
-        panel: '#12150F',
-        panel2: '#171C13',
-        lime: '#B8F135',
-        cream: '#F2F5EC',
-        muted: '#9AA48F',
+        ink: 'rgb(var(--c-bg) / <alpha-value>)',
+        panel: 'rgb(var(--c-panel) / <alpha-value>)',
+        panel2: 'rgb(var(--c-panel2) / <alpha-value>)',
+        lime: 'rgb(var(--c-accent) / <alpha-value>)',
+        accent2: 'rgb(var(--c-accent2) / <alpha-value>)',
+        onaccent: 'rgb(var(--c-onaccent) / <alpha-value>)',
+        cream: 'rgb(var(--c-text) / <alpha-value>)',
+        muted: 'rgb(var(--c-muted) / <alpha-value>)',
       },
       fontFamily: {
         display: ['"Space Grotesk"', 'sans-serif'],
@@ -23,7 +25,7 @@ export default {
       },
       keyframes: {
         marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
-        pulseDot: { '0%,100%': { boxShadow: '0 0 0 0 rgba(184,241,53,0.55)' }, '50%': { boxShadow: '0 0 0 7px rgba(184,241,53,0)' } },
+        pulseDot: { '0%,100%': { boxShadow: '0 0 0 0 rgb(var(--c-accent) / .55)' }, '50%': { boxShadow: '0 0 0 7px rgb(var(--c-accent) / 0)' } },
         floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
       },
     },
