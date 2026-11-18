@@ -5,8 +5,10 @@ import {
   Globe, ShoppingBag, PenTool, Gauge, Search, LayoutTemplate, Code2,
   Blocks, Sparkles, GraduationCap, Calculator, Percent, Landmark, Shirt, Star,
   Command, Copy, Check, CornerDownLeft, Rocket,
+  Dumbbell, Car, HardHat, Building2, Lightbulb, type LucideIcon,
 } from 'lucide-react';
 import { profileImage } from './profile-image';
+import { projectShots } from './project-shots';
 
 const EMAIL = 'alis5597153@gmail.com';
 
@@ -267,7 +269,42 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (v: boolean
 
 /* ------------------------------- DATA ------------------------------- */
 
-const projects = [
+type Project = {
+  name: string; tag: string; desc: string; stack: string[]; link: string;
+  cover: string; icon: LucideIcon; shot?: string;
+};
+
+const projects: Project[] = [
+  {
+    name: 'GymFlow', tag: 'SaaS · Gym Management',
+    desc: 'A complete gym operating system — member check-ins, class bookings, trainer schedules and revenue analytics in one bold dashboard.',
+    stack: ['Next.js', 'Supabase-ready', 'Tailwind'], link: 'https://gymflow-one-omega.vercel.app',
+    cover: 'from-[#0A1F14] via-[#0E3D24] to-[#2EF2A0]', icon: Dumbbell, shot: projectShots.gymflow,
+  },
+  {
+    name: 'DriveHub', tag: 'Car Rental · Dubai',
+    desc: 'A premium car rental platform with a studio-style fleet console — 360° car views, live bookings and running-cost tracking.',
+    stack: ['Next.js', 'React', 'Tailwind'], link: 'https://drivehub-jade.vercel.app',
+    cover: 'from-[#0B1319] via-[#263846] to-[#93A3AC]', icon: Car, shot: projectShots.drivehub,
+  },
+  {
+    name: 'BuildTrack', tag: 'Construction OS',
+    desc: 'Project control for construction teams — site progress, materials, workforce and budgets tracked across every build.',
+    stack: ['Next.js', 'TypeScript', 'Dashboards'], link: 'https://buildtrack-mauve-two.vercel.app',
+    cover: 'from-[#1A1408] via-[#3D2E0E] to-[#F5B135]', icon: HardHat, shot: projectShots.buildtrack,
+  },
+  {
+    name: 'PropSuite', tag: 'Real Estate · Dubai',
+    desc: 'A Dubai property portal with an agent CRM — listings, leads and viewings in one elegant workspace.',
+    stack: ['Next.js', 'CRM', 'Tailwind'], link: 'https://propsuite-beta.vercel.app',
+    cover: 'from-[#101820] via-[#1E2E3D] to-[#C9A86A]', icon: Building2, shot: projectShots.propsuite,
+  },
+  {
+    name: 'IdeaPilot', tag: 'AI SaaS · Validation',
+    desc: 'An AI-style startup idea validator — a five-step onboarding turns a rough concept into a scored validation report with market, competition and next steps.',
+    stack: ['Next.js', 'AI Concept', 'Dashboards'], link: 'https://ideapilot-two.vercel.app',
+    cover: 'from-[#170B26] via-[#2E1063] to-[#A855F7]', icon: Lightbulb, shot: projectShots.ideapilot,
+  },
   {
     name: 'University Manager', tag: 'Web App · SaaS',
     desc: 'A student management PWA for university classes — group roles, class packs, schedules and shared resources, all in one place.',
@@ -372,12 +409,30 @@ function TiltCard({ p }: { p: typeof projects[number] }) {
     <article ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}
       className="group relative flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-panel transition-transform duration-200 ease-out will-change-transform">
       <div ref={glareRef} aria-hidden className="pointer-events-none absolute inset-0 z-10" />
-      <div className={`relative h-44 overflow-hidden bg-gradient-to-br ${p.cover} sm:h-52`}>
-        <div aria-hidden className="absolute inset-0 opacity-25" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,.35) 1px, transparent 1px)', backgroundSize: '18px 18px' }} />
-        <Icon className="absolute bottom-5 left-5 h-11 w-11 text-white/90 transition duration-300 group-hover:scale-110" strokeWidth={1.5} />
-        <span className="absolute right-5 top-5 rounded-full bg-black/35 px-3 py-1 font-mono text-[11px] font-medium text-white backdrop-blur">{p.tag}</span>
-        {p.link && <ArrowUpRight className="absolute bottom-5 right-5 h-6 w-6 text-white/80 transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />}
-      </div>
+      {p.shot ? (
+        <div className="relative">
+          <div className="flex items-center gap-2 border-b border-white/10 bg-black/50 px-4 py-2.5">
+            <span className="flex gap-1.5" aria-hidden>
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+            </span>
+            <span className="ml-1 min-w-0 flex-1 truncate rounded-md bg-white/5 px-2.5 py-1 text-center font-mono text-[10px] text-cream/70">{p.link.replace('https://', '')}</span>
+            <span className="hidden shrink-0 rounded-full bg-lime/15 px-2.5 py-1 font-mono text-[10px] font-semibold text-lime sm:block">{p.tag}</span>
+          </div>
+          <div className="relative h-48 overflow-hidden sm:h-56">
+            <img src={p.shot} alt={`${p.name} — live site screenshot`} loading="lazy" className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" />
+            <ArrowUpRight className="absolute bottom-4 right-4 h-6 w-6 rounded-full bg-black/45 p-1 text-white backdrop-blur transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
+        </div>
+      ) : (
+        <div className={`relative h-44 overflow-hidden bg-gradient-to-br ${p.cover} sm:h-52`}>
+          <div aria-hidden className="absolute inset-0 opacity-25" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,.35) 1px, transparent 1px)', backgroundSize: '18px 18px' }} />
+          <Icon className="absolute bottom-5 left-5 h-11 w-11 text-white/90 transition duration-300 group-hover:scale-110" strokeWidth={1.5} />
+          <span className="absolute right-5 top-5 rounded-full bg-black/35 px-3 py-1 font-mono text-[11px] font-medium text-white backdrop-blur">{p.tag}</span>
+          {p.link && <ArrowUpRight className="absolute bottom-5 right-5 h-6 w-6 text-white/80 transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />}
+        </div>
+      )}
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-display text-2xl font-bold">{p.name}</h3>
         <p className="mt-2 flex-1 leading-relaxed text-muted">{p.desc}</p>
