@@ -58,3 +58,8 @@ body, header, section, footer, article, div, a, button, span, p, h1, h2, h3, h4,
 }
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid rgb(var(--c-accent)); outline-offset: 3px; border-radius: 4px; }
+
+/* Mobile backstop: never allow sideways page scroll */
+body {
+  overflow-x: clip;
+}
